@@ -86,10 +86,10 @@
                         <td><%=objGV.getDiaChi()%></td>
                         <td><%=objGV.getSdt()%></td>
                         <td>
-<!--                            <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                <a href="<%=request.getContextPath()%>/admin/menu/edit?id=<%=objGV.getMaGV()%>">Cập nhật</a>
-                            </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button>-->
+                            <!--                            <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
+                                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=<%=objGV.getMaGV()%>">Cập nhật</a>
+                                                        </button>
+                                                        <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button>-->
                         </td>
                     </tr>
                     <%
