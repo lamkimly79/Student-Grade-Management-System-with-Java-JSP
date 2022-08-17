@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class namhoc {
 
-	private String maNH;
-	private String tenNH;
-	
+    private String maNH;
+    private String tenNH;
+
 }

@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 
 public class giangvien {
 
-	private String maGV;
-	private String tenGV;
-	private String diaChi;
-	private int sdt;
-	private String email;
-	
+    private String maGV;
+    private String tenGV;
+    private String diaChi;
+    private int sdt;
+    private String email;
+
 }

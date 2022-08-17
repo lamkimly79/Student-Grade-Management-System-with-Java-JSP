@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 
 public class xeploai {
 
-	private int maXL;
-	private float canDuoi;
-	private float canTren;
-	private String tenXL;
-	
+    private int maXL;
+    private float canDuoi;
+    private float canTren;
+    private String tenXL;
+
 }

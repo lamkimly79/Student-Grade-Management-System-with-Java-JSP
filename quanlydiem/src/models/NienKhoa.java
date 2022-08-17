@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class NienKhoa {
-	
-	private String maNK;
-	private String tenNK;
-	
+
+    private String maNK;
+    private String tenNK;
+
 }

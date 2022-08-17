@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 
 public class monhoc {
 
-	private String maMH;
-	private String tenMH;
-	tinchi tinchi;
-	theloai theloai;
-	
+    private String maMH;
+    private String tenMH;
+    tinchi tinchi;
+    theloai theloai;
+
 }

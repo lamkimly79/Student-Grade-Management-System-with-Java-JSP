@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class theloai {
 
-	private String maTL;
-	private String tenTL;
-	
+    private String maTL;
+    private String tenTL;
+
 }

@@ -10,29 +10,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AdminIndexController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public AdminIndexController() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    public AdminIndexController() {
+        super();
+    }
 
-		HttpSession session = request.getSession();
-		if(session.getAttribute("userInfor") == null) {
-			response.sendRedirect(request.getContextPath()+"/auth/login");
-			return;
-		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/index.jsp");
-		rd.forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	}
+        HttpSession session = request.getSession();
+        if (session.getAttribute("userInfor") == null) {
+            response.sendRedirect(request.getContextPath() + "/auth/login");
+            return;
+        }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/views/admin/index.jsp");
+        rd.forward(request, response);
 
-	}
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
 
 }

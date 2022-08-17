@@ -86,10 +86,13 @@
                         <td><%=objGV.getDiaChi()%></td>
                         <td><%=objGV.getSdt()%></td>
                         <td>
-                            <!--                            <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=<%=objGV.getMaGV()%>">Cập nhật</a>
-                                                        </button>
-                                                        <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button>-->
+                            <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
+                                <a href="<%=request.getContextPath()%>/admin/menu/edit?id=<%=objGV.getMaGV()%>">Cập nhật</a>
+                            </button>
+                            <form action="<%=request.getContextPath()%>/admin/giangvien" method="post">
+                                <a href="/" type="button" class="btn btn-danger">Xóa</a>
+                                <input type="hidden" name="action" value="delete">
+                            </form>
                         </td>
                     </tr>
                     <%
@@ -116,7 +119,6 @@
                 </div>
                 <div class="modal-body">
                     <form action ="<%=request.getContextPath()%>/admin/giangvien" method="post">
-
                         <div class="form-group row">
                             <label for="exampleFormControlFile1" class="col-sm-3">Mã Giảng viên</label>
                             <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="magv">
@@ -137,6 +139,7 @@
                             <label for="exampleFormControlFile1" class="col-sm-3">Email</label>
                             <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="email">
                         </div>
+                        <input type="hidden" name="action" value="add">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                             <button type="submit" class="btn btn-primary">Thêm</button>

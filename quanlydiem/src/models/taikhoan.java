@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class taikhoan {
-	
-	private int id;
-	private String username;
-	private String password;
-	private String email;
-	roles role;
-	
+
+    private int id;
+    private String username;
+    private String password;
+    private String email;
+    roles role;
+
 }

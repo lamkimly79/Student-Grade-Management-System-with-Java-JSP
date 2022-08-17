@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class monhoc_giangvien {
 
-	monhoc monhoc;
-	giangvien giangvien;
-	
+    monhoc monhoc;
+    giangvien giangvien;
+
 }

@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Lop {
-	
-	private int maLop;
-	private String tenLop;
-	Khoa khoa;
-	
+
+    private int maLop;
+    private String tenLop;
+    Khoa khoa;
+
 }

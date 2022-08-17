@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class tinchi {
-	
-	private String maTC;
-	private int soTC;
-	
+
+    private String maTC;
+    private int soTC;
+
 }

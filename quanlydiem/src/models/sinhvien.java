@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 
 public class sinhvien {
 
-	private int maSV;
-	private String tenSV;
-	private String diaChi;
-	private int sdt;
-	private String email;
-	Lop lop;
-	
+    private int maSV;
+    private String tenSV;
+    private String diaChi;
+    private int sdt;
+    private String email;
+    Lop lop;
+
 }

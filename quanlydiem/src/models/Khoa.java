@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Khoa {
-	
-	private String maKH;
-	private String tenKH;
-	private String lienheKH;
-	
+
+    private String maKH;
+    private String tenKH;
+    private String lienheKH;
+
 }

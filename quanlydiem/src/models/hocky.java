@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class hocky {
-	
-	private String maHK;
-	private String tenHK;
-	
+
+    private String maHK;
+    private String tenHK;
+
 }
