@@ -87,10 +87,7 @@
                         <td><%=objTK.getEmail()%></td>
                         <td><%=objTK.getRole().getRole()%></td>
                         <td>
-                            <%-- <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=">Cập nhật</a>
-                                    </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button> --%>
+                            
                         </td>
                     </tr>
                     <%

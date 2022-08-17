@@ -1,5 +1,6 @@
 package controllers;
 
+import daos.GiangVienDAO;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import daos.RolesDAO;
+import models.giangvien;
 import models.roles;
 
 public class AdminRolesController extends HttpServlet {
@@ -45,18 +47,30 @@ public class AdminRolesController extends HttpServlet {
 
         RolesDAO rolesDAO = new RolesDAO();
 
-        String role = request.getParameter("role");
+        if (request.getParameter("action").equals("add")) {
+            String role = request.getParameter("role");
 
-        roles objR = new roles(0, role);
-        int add = rolesDAO.add(objR);
-        if (add > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/role?msg=OK");
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/role?msg=ERROR");
-            return;
+            roles objR = new roles(0, role);
+            int add = rolesDAO.add(objR);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/role?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/role?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
+
+            int delete = rolesDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/role?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/role?msg=ERROR");
+                return;
+            }
         }
-
     }
 
 }

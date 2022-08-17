@@ -57,22 +57,32 @@ public class AdminMonHocController extends HttpServlet {
 
         MonHocDAO monHocDAO = new MonHocDAO();
 
-        String maMH = request.getParameter("maMH");
+        if (request.getParameter("action").equals("add")) {
+            String maMH = request.getParameter("maMH");
+            String tenMH = request.getParameter("tenMH");
+            String maTC = request.getParameter("maTC");
+            String maTL = request.getParameter("maTL");
 
-        String tenMH = request.getParameter("tenMH");
+            monhoc objMH = new monhoc(maMH, tenMH, new tinchi(maTC, 0), new theloai(maTL, null));
+            int add = monHocDAO.add(objMH);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/monhoc?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/monhoc?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
 
-        String maTC = request.getParameter("maTC");
-
-        String maTL = request.getParameter("maTL");
-
-        monhoc objMH = new monhoc(maMH, tenMH, new tinchi(maTC, 0), new theloai(maTL, null));
-        int add = monHocDAO.add(objMH);
-        if (add > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/monhoc?msg=OK");
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/monhoc?msg=ERROR");
-            return;
+            int delete = monHocDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/monhoc?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/monhoc?msg=ERROR");
+                return;
+            }
         }
 
     }

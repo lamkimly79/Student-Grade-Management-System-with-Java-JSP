@@ -35,7 +35,6 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>150</h3>
-
                             <p>Nhập điểm</p>
                         </div>
                         <div class="icon">
@@ -50,7 +49,6 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>53<sup style="font-size: 20px">%</sup></h3>
-
                             <p>Sinh Viên</p>
                         </div>
                         <div class="icon">
@@ -65,7 +63,6 @@
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>44</h3>
-
                             <p>Giảng Viên</p>
                         </div>
                         <div class="icon">

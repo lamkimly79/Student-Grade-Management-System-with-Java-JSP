@@ -82,10 +82,11 @@
                         <td><%=objTC.getMaTC()%></td>
                         <td><%=objTC.getSoTC()%></td>
                         <td>
-                            <%-- <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=">Cập nhật</a>
-                                    </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button> --%>
+                            <form action="<%=request.getContextPath()%>/admin/tinchi" method="post">
+                                <input type="hidden" name="id" value="<%=objTC.getMaTC()%>" />
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                <input type="hidden" name="action" value="delete">
+                            </form>
                         </td>
                     </tr>
                     <%
@@ -120,6 +121,7 @@
                             <label for="exampleFormControlFile1" class="col-sm-3">Số Tín Chỉ</label>
                             <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="soTC">
                         </div>
+                        <input type="hidden" name="action" value="add">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                             <button type="submit" class="btn btn-primary">Thêm</button>

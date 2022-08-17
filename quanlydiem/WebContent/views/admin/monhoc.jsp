@@ -86,10 +86,11 @@
                         <td><%=objMH.getTinchi().getSoTC()%></td>
                         <td><%=objMH.getTheloai().getTenTL()%></td>
                         <td>
-                            <%-- <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=">Cập nhật</a>
-                                    </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button> --%>
+                            <form action="<%=request.getContextPath()%>/admin/monhoc" method="post">
+                                <input type="hidden" name="id" value="<%=objMH.getMaMH()%>" />
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                <input type="hidden" name="action" value="delete">
+                            </form>
                         </td>
                     </tr>
                     <%
@@ -117,15 +118,15 @@
                 <div class="modal-body">
                     <form action ="<%=request.getContextPath()%>/admin/monhoc" method="post">
                         <div class="form-group row">
-                            <label for="exampleFormControlFile1" class="col-sm-3">Mã Môn Học</label>
-                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="maMH">
+                            <label for="exampleFormControlFile1">Mã Môn Học</label>
+                            <input type="text" class="form-control" id="exampleFormControlFile1" name="maMH">
                         </div>
                         <div class="form-group row">
-                            <label for="exampleFormControlFile1" class="col-sm-3">Môn Học</label>
-                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="tenMH">
+                            <label for="exampleFormControlFile1">Môn Học</label>
+                            <input type="text" class="form-control" id="exampleFormControlFile1" name="tenMH">
                         </div>
                         <div class="form-group row">
-                            <label for="exampleFormControlFile1" class="col-sm-3">Số Tín Chỉ</label>
+                            <label for="exampleFormControlFile1">Số Tín Chỉ</label>
                             <%
                                 if (request.getAttribute("tinchiList") != null) {
                                     List<tinchi> tinchiList = (List<tinchi>) request.getAttribute("tinchiList");
@@ -146,7 +147,7 @@
                             %>
                         </div>
                         <div class="form-group row">
-                            <label for="exampleFormControlFile1" class="col-sm-3">Thể Loại</label>
+                            <label for="exampleFormControlFile1">Thể Loại</label>
                             <%
                                 if (request.getAttribute("theloaiList") != null) {
                                     List<theloai> theloaiList = (List<theloai>) request.getAttribute("theloaiList");
@@ -166,6 +167,7 @@
                                 }
                             %>
                         </div>
+                        <input type="hidden" name="action" value="add">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                             <button type="submit" class="btn btn-primary">Thêm</button>

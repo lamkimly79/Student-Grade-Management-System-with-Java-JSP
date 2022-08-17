@@ -60,33 +60,27 @@
                     }
                 }
             %>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalThem">Thêm</button>
+
             <table class="table table-bordered" id="datatable">
                 <thead class="thead-CCFFFF">
                     <tr class="list-header">
-                        <th scope="col">#</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Mã Học Kỳ</th>
                         <th scope="col">Tên Học Kỳ</th>
-                        <th scope="col">Chức năng</th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
+                        int i = 1;
                         if (request.getAttribute("hockyList") != null) {
                             List<hocky> hockyList = (List<hocky>) request.getAttribute("hockyList");
                             if (hockyList.size() > 0) {
                                 for (hocky objHK : hockyList) {
                     %>
                     <tr class="tr-hover">
-                        <th scope="row"><input type="checkbox" name="vehicle1" value="Bike"></th>
+                        <th scope="row"><%=i++%></th>
                         <td><%=objHK.getMaHK()%></td>
                         <td><%=objHK.getTenHK()%></td>
-                        <td>
-                            <%-- <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=">Cập nhật</a>
-                                    </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button> --%>
-                        </td>
                     </tr>
                     <%
                                 }

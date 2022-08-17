@@ -41,4 +41,17 @@ public class RolesDAO extends AbstractDAO {
         return result;
     }
 
+    public int delete(String id) {
+        con = DBConnectionUtils.getConnection();
+        int result = 0;
+        String sql = "DELETE FROM roles WHERE id = ?";
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, id);
+            result = pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

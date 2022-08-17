@@ -45,25 +45,36 @@ public class AdminTinChiController extends HttpServlet {
 
         TinChiDAO tinChiDAO = new TinChiDAO();
 
-        String maTC = request.getParameter("maTC");
+        if (request.getParameter("action").equals("add")) {
+            String maTC = request.getParameter("maTC");
 
-        int soTC = 0;
-        try {
-            soTC = Integer.parseInt(request.getParameter("soTC"));
-        } catch (NumberFormatException e) {
-            System.out.println("Lỗi ..!");
+            int soTC = 0;
+            try {
+                soTC = Integer.parseInt(request.getParameter("soTC"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi ..!");
+            }
+
+            tinchi objTC = new tinchi(maTC, soTC);
+            int add = tinChiDAO.add(objTC);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/tinchi?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/tinchi?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
+
+            int delete = tinChiDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/tinchi?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/tinchi?msg=ERROR");
+            }
         }
-
-        tinchi objTC = new tinchi(maTC, soTC);
-        int add = tinChiDAO.add(objTC);
-        if (add > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/tinchi?msg=OK");
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/tinchi?msg=ERROR");
-            return;
-        }
-
     }
 
 }

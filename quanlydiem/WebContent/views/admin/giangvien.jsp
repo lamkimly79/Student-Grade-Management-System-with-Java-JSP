@@ -86,11 +86,9 @@
                         <td><%=objGV.getDiaChi()%></td>
                         <td><%=objGV.getSdt()%></td>
                         <td>
-                            <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                <a href="<%=request.getContextPath()%>/admin/menu/edit?id=<%=objGV.getMaGV()%>">Cập nhật</a>
-                            </button>
                             <form action="<%=request.getContextPath()%>/admin/giangvien" method="post">
-                                <a href="/" type="button" class="btn btn-danger">Xóa</a>
+                                <input type="hidden" name="id" value="<%=objGV.getMaGV()%>" />
+                                <button type="submit" class="btn btn-danger">Xóa</button>
                                 <input type="hidden" name="action" value="delete">
                             </form>
                         </td>

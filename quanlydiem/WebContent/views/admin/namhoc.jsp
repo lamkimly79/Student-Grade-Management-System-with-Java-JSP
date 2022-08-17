@@ -64,7 +64,7 @@
             <table class="table table-bordered" id="datatable">
                 <thead class="thead-CCFFFF">
                     <tr class="list-header">
-                        <th scope="col">#</th>
+                        <th scope="col">STT</th>
                         <th scope="col">Mã Năm Học</th>
                         <th scope="col">Năm Học</th>
                         <th scope="col">Chức năng</th>
@@ -72,20 +72,22 @@
                 </thead>
                 <tbody>
                     <%
+                        int i = 1;
                         if (request.getAttribute("namHocList") != null) {
                             List<namhoc> namHocList = (List<namhoc>) request.getAttribute("namHocList");
                             if (namHocList.size() > 0) {
                                 for (namhoc objNH : namHocList) {
                     %>
                     <tr class="tr-hover">
-                        <th scope="row"><input type="checkbox" name="vehicle1" value="Bike"></th>
+                        <th scope="row"><%=i++%></th>
                         <td><%=objNH.getMaNH()%></td>
                         <td><%=objNH.getTenNH()%></td>
                         <td>
-                            <%-- <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=">Cập nhật</a>
-                                    </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button> --%>
+                            <form action="<%=request.getContextPath()%>/admin/namhoc" method="post">
+                                <input type="hidden" name="id" value="<%=objNH.getMaNH()%>" />
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                <input type="hidden" name="action" value="delete">
+                            </form>
                         </td>
                     </tr>
                     <%
@@ -120,10 +122,11 @@
                             <label for="exampleFormControlFile1" class="col-sm-3">Năm Học</label>
                             <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="tenNH">
                         </div>
+                        <input type="hidden" name="action" value="add">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                             <button type="submit" class="btn btn-primary">Thêm</button>
-                        </div>        
+                        </div>  
                     </form>
                 </div>
             </div>
@@ -131,27 +134,27 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-    $("form").submit(function(event){
+    $(document).ready(function () {
+    $("form").submit(function (event) {
     event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-            url:"input",
+            url: "input",
                     type: "post",
                     data: formData,
-                    success: function(data){
+                    success: function (data) {
                     var row = data;
-                            for (i = 0; i < row.length; i++){
+                            for (i = 0; i < row.length; i++) {
                     var column = row[i];
                             var eachrow = "<tr>";
-                            for (j = 0; j < column.lenght; j++){
+                            for (j = 0; j < column.lenght; j++) {
                     eachrow = eachrow + "<td>" + column[j] + "</td>";
                     }
                     eachrow = eachrow + "</td>";
                             $('#tbody').append(eachrow);
                     }
                     },
-                    cache:false,
+                    cache: false,
                     contentType: false,
                     processData: false
             })

@@ -43,9 +43,9 @@ public class AdminGiangVienController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        if (request.getParameter("action").equals("add")) {
-            GiangVienDAO giangvienDAO = new GiangVienDAO();
+        GiangVienDAO giangvienDAO = new GiangVienDAO();
 
+        if (request.getParameter("action").equals("add")) {
             String magv = request.getParameter("magv");
             String tengv = request.getParameter("tengv");
             String diachi = request.getParameter("diachi");
@@ -66,9 +66,16 @@ public class AdminGiangVienController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/admin/giangvien?msg=ERROR");
                 return;
             }
-        } else if (request.getParameter("action") == "delete") {
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
 
+            int delete = giangvienDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/giangvien?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/giangvien?msg=ERROR");
+            }
         }
     }
-
 }

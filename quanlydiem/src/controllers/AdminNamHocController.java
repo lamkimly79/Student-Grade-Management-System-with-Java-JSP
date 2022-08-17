@@ -44,20 +44,32 @@ public class AdminNamHocController extends HttpServlet {
 
         NamHocDAO namHocDAO = new NamHocDAO();
 
-        String maNH = request.getParameter("maNH");
+        if (request.getParameter("action").equals("add")) {
+            String maNH = request.getParameter("maNH");
 
-        String tenNH = request.getParameter("tenNH");
+            String tenNH = request.getParameter("tenNH");
 
-        namhoc objNH = new namhoc(maNH, tenNH);
-        int add = namHocDAO.add(objNH);
-        if (add > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/namhoc?msg=OK");
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/namhoc?msg=ERROR");
-            return;
+            namhoc objNH = new namhoc(maNH, tenNH);
+            int add = namHocDAO.add(objNH);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/namhoc?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/namhoc?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
+
+            int delete = namHocDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/namhoc?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/namhoc?msg=ERROR");
+                return;
+            }
         }
-
     }
 
 }

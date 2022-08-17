@@ -3,11 +3,6 @@
          pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="/admin" class="brand-link">
-        <img src="/templates/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Quản lý điểm sinh viên</span>
-    </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -25,18 +20,6 @@
             <%
                 }
             %>
-        </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
         </div>
 
         <!-- Sidebar Menu -->
@@ -83,12 +66,12 @@
                                 <p>Năm học</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+<!--                        <li class="nav-item">
                             <a href="<%=request.getContextPath()%>/admin/nienkhoa" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Niên Khóa</p>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -120,7 +103,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+<!--                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
                         <p>
@@ -142,8 +125,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-
+                </li>-->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
@@ -163,12 +145,6 @@
                             <a href="<%=request.getContextPath()%>/admin/role" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Loại tài khoản</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<%=request.getContextPath()%>/auth/login" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đăng xuất</p>
                             </a>
                         </li>
                     </ul>

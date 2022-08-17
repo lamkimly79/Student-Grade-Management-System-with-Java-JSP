@@ -45,20 +45,31 @@ public class AdminTheLoaiController extends HttpServlet {
 
         TheLoaiDAO theLoaiDAO = new TheLoaiDAO();
 
-        String maTL = request.getParameter("maTL");
+        if (request.getParameter("action").equals("add")) {
+            String maTL = request.getParameter("maTL");
+            String tenTL = request.getParameter("tenTL");
 
-        String tenTL = request.getParameter("tenTL");
+            theloai objTL = new theloai(maTL, tenTL);
+            int add = theLoaiDAO.add(objTL);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/theloai?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/theloai?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
 
-        theloai objTL = new theloai(maTL, tenTL);
-        int add = theLoaiDAO.add(objTL);
-        if (add > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/theloai?msg=OK");
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/theloai?msg=ERROR");
-            return;
+            int delete = theLoaiDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/theloai?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/theloai?msg=ERROR");
+                return;
+            }
         }
-
     }
 
 }

@@ -61,6 +61,10 @@
                 }
             %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalThem">Thêm</button>
+            <button type="button" hidden class="btn btn-warning" data-toggle="modal" data-target="#modalSua">
+                Sửa
+            </button>
+
             <table class="table table-bordered" id="datatable">
                 <thead class="thead-CCFFFF">
                     <tr class="list-header">
@@ -88,10 +92,12 @@
                         <td><%=objSV.getSdt()%></td>
                         <td><%=objSV.getLop().getTenLop()%></td>
                         <td>
-                            <%-- <button type="button" class="btn btn-warning suaMenu" data-toggle="modal" data-target="#exampleModalSua">
-                                            <a href="<%=request.getContextPath()%>/admin/menu/edit?id=">Cập nhật</a>
-                                    </button>
-                            <button xoaMenu="" type="button" class="btn btn-danger">Xóa</button> --%>
+                            <a class="btn btn-warning" href="?edit-id=<%=objSV.getMaSV()%>">Sửa</a>
+                            <form action="<%=request.getContextPath()%>/admin/sinhvien" method="post">
+                                <input type="hidden" name="id" value="<%=objSV.getMaSV()%>" />
+                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                <input type="hidden" name="action" value="delete">
+                            </form>
                         </td>
                     </tr>
                     <%
@@ -117,7 +123,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action ="<%=request.getContextPath()%>/admin/sinhvien" method="post">
+                    <form id="form-add" action ="<%=request.getContextPath()%>/admin/sinhvien" method="post">
 
                         <div class="form-group row">
                             <label for="exampleFormControlFile1" class="col-sm-3">Mã sinh viên</label>
@@ -159,6 +165,7 @@
                                     }
                                 }
                             %>
+                            <input type="hidden" name="action" value="add">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
@@ -169,34 +176,143 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalSua" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sửa sinh viên</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-edit" action ="<%=request.getContextPath()%>/admin/sinhvien" method="post">
+                        <% if (request.getAttribute("editData") != null) {
+                                sinhvien sv = (sinhvien) request.getAttribute("editData");%>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-3">Mã sinh viên</label>
+                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="masv" value="<%=sv.getMaSV()%>">
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-3">Tên sinh viên</label>
+                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="tensv" value="<%=sv.getTenSV()%>">
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-3">Địa chỉ</label>
+                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="diachi" value="<%=sv.getDiaChi()%>">
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-3">Số điện thoại</label>
+                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="sdt" value="<%=sv.getSdt()%>">
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-3">Email</label>
+                            <input type="text" class="form-control-file col-sm-8" id="exampleFormControlFile1" name="email" value="<%=sv.getEmail()%>">
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-3">Lớp</label>
+                            <%
+                                if (request.getAttribute("lopList") != null) {
+                                    List<Lop> lopList = (List<Lop>) request.getAttribute("lopList");
+                                    if (lopList.size() > 0) {
+                            %>
+                            <select class="form-control" id="exampleFormControlSelect1" name="malop">
+                                <%
+                                    for (Lop objLop : lopList) {
+                                %>
+                                <option value="<%=objLop.getMaLop()%>"><%=objLop.getTenLop()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                            <%
+                                    }
+                                }
+                            %>
+                            <input type="hidden" name="action" value="edit">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                            <button type="submit" class="btn btn-primary">Sửa</button>
+                        </div>
+                        <%}%>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- jQuery -->
+<script src="<%=request.getContextPath()%>/templates/admin/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-    $("form").submit(function(event){
-    event.preventDefault();
+    $(document).ready(function () {
+        $("#form-add").submit(function (event) {
+            event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-            url:"input",
-                    type: "post",
-                    data: formData,
-                    success: function(data){
+                url: "input",
+                type: "post",
+                data: formData,
+                success: function (data) {
                     var row = data;
-                            for (i = 0; i < row.length; i++){
-                    var column = row[i];
-                            var eachrow = "<tr>";
-                            for (j = 0; j < column.lenght; j++){
-                    eachrow = eachrow + "<td>" + column[j] + "</td>";
+                    for (i = 0; i < row.length; i++) {
+                        var column = row[i];
+                        var eachrow = "<tr>";
+                        for (j = 0; j < column.lenght; j++) {
+                            eachrow = eachrow + "<td>" + column[j] + "</td>";
+                        }
+                        eachrow = eachrow + "</td>";
+                        $('#tbody').append(eachrow);
                     }
-                    eachrow = eachrow + "</td>";
-                            $('#tbody').append(eachrow);
-                    }
-                    },
-                    cache:false,
-                    contentType: false,
-                    processData: false
+                },
+                cache: false,
+                contentType: false,
+                processData: false
             })
-    })
-    }
+        })
+
+        $("#form-edit").submit(function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: "input",
+                type: "post",
+                data: formData,
+                success: function (data) {
+                    var row = data;
+                    for (i = 0; i < row.length; i++) {
+                        var column = row[i];
+                        var eachrow = "<tr>";
+                        for (j = 0; j < column.lenght; j++) {
+                            eachrow = eachrow + "<td>" + column[j] + "</td>";
+                        }
+                        eachrow = eachrow + "</td>";
+                        $('#tbody').append(eachrow);
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        })
+
+        function GetParameterValues(param) {
+            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < url.length; i++) {
+                var urlparam = url[i].split('=');
+                if (urlparam[0] == param) {
+                    return urlparam[1];
+                }
+            }
+        }
+
+        if (GetParameterValues('edit-id') != undefined) {
+
+            document.querySelector("[data-target='#modalSua']").click();
+        }
+    });
 </script>
 <!-- /.content-wrapper -->
 <%@include file="/templates/admin/inc/footer.jsp" %>

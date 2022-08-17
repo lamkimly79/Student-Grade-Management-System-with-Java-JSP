@@ -40,7 +40,12 @@ public class AdminSinhVienController extends HttpServlet {
         List<Lop> lopList = lopDAO.findAll();
         request.setAttribute("lopList", lopList);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/views/admin/sinhvien.jsp");
+        Object id = request.getParameter("edit-id");
+        if (request.getParameter("edit-id") != null) {
+            request.setAttribute("editData", sinhvienDAO.find(id));
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("/views/admin/sinhvien.jsp?edit-id=" + id);
         rd.forward(request, response);
     }
 
@@ -52,40 +57,86 @@ public class AdminSinhVienController extends HttpServlet {
 
         SinhVienDAO sinhvienDAO = new SinhVienDAO();
 
-        int masv = 0;
-        try {
-            masv = Integer.parseInt(request.getParameter("masv"));
-        } catch (NumberFormatException e) {
-            System.out.println("Lỗi..!");
-        }
-        String tensv = request.getParameter("tensv");
-        String diachi = request.getParameter("diachi");
-        int sdt = 0;
-        try {
-            sdt = Integer.parseInt(request.getParameter("sdt"));
-        } catch (NumberFormatException e) {
-            System.out.println("Lỗi..!");
-        }
-        String email = request.getParameter("email");
-        int malop = 0;
-        try {
-            malop = Integer.parseInt(request.getParameter("malop"));
-        } catch (NumberFormatException e) {
-            System.out.println("Lỗi..!");
-        }
+        if (request.getParameter("action").equals("add")) {
+            int masv = 0;
+            try {
+                masv = Integer.parseInt(request.getParameter("masv"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi..!");
+            }
+            String tensv = request.getParameter("tensv");
+            String diachi = request.getParameter("diachi");
+            int sdt = 0;
+            try {
+                sdt = Integer.parseInt(request.getParameter("sdt"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi..!");
+            }
+            String email = request.getParameter("email");
+            int malop = 0;
+            try {
+                malop = Integer.parseInt(request.getParameter("malop"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi..!");
+            }
 
-        sinhvien objSV = new sinhvien(masv, tensv, diachi, sdt, email,
-                new Lop(malop, null,
-                        new Khoa(null, null, null)));
-        int add = sinhvienDAO.add(objSV);
-        if (add > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=OK");
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=ERROR");
-            return;
-        }
+            sinhvien objSV = new sinhvien(masv, tensv, diachi, sdt, email,
+                    new Lop(malop, null,
+                            new Khoa(null, null, null)));
+            int add = sinhvienDAO.add(objSV);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("edit")) {
+            int masv = 0;
+            try {
+                masv = Integer.parseInt(request.getParameter("masv"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi..!");
+            }
+            String tensv = request.getParameter("tensv");
+            String diachi = request.getParameter("diachi");
+            int sdt = 0;
+            try {
+                sdt = Integer.parseInt(request.getParameter("sdt"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi..!");
+            }
+            String email = request.getParameter("email");
+            int malop = 0;
+            try {
+                malop = Integer.parseInt(request.getParameter("malop"));
+            } catch (NumberFormatException e) {
+                System.out.println("Lỗi..!");
+            }
 
+            sinhvien objSV = new sinhvien(masv, tensv, diachi, sdt, email,
+                    new Lop(malop, null,
+                            new Khoa(null, null, null)));
+            int add = sinhvienDAO.edit(objSV);
+            if (add > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=ERROR");
+                return;
+            }
+        } else if (request.getParameter("action").equals("delete")) {
+            String id = request.getParameter("id");
+
+            int delete = sinhvienDAO.delete(id);
+            if (delete > 0) {
+                response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=OK");
+                return;
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/sinhvien?msg=ERROR");
+                return;
+            }
+        }
     }
 
 }
