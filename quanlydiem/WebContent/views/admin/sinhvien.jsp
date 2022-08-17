@@ -92,7 +92,7 @@
                         <td><%=objSV.getSdt()%></td>
                         <td><%=objSV.getLop().getTenLop()%></td>
                         <td>
-                            <a class="btn btn-warning" href="?edit-id=<%=objSV.getMaSV()%>">Sửa</a>
+                            <!--<a class="btn btn-warning" href="?edit-id=<%=objSV.getMaSV()%>">Sửa</a>-->
                             <form action="<%=request.getContextPath()%>/admin/sinhvien" method="post">
                                 <input type="hidden" name="id" value="<%=objSV.getMaSV()%>" />
                                 <button type="submit" class="btn btn-danger">Xóa</button>
@@ -244,11 +244,9 @@
     </div>
 </div>
 
-<!-- jQuery -->
-<script src="<%=request.getContextPath()%>/templates/admin/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#form-add").submit(function (event) {
+        $("form").submit(function (event) {
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -272,46 +270,6 @@
                 processData: false
             })
         })
-
-        $("#form-edit").submit(function (event) {
-            event.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "input",
-                type: "post",
-                data: formData,
-                success: function (data) {
-                    var row = data;
-                    for (i = 0; i < row.length; i++) {
-                        var column = row[i];
-                        var eachrow = "<tr>";
-                        for (j = 0; j < column.lenght; j++) {
-                            eachrow = eachrow + "<td>" + column[j] + "</td>";
-                        }
-                        eachrow = eachrow + "</td>";
-                        $('#tbody').append(eachrow);
-                    }
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-            })
-        })
-
-        function GetParameterValues(param) {
-            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for (var i = 0; i < url.length; i++) {
-                var urlparam = url[i].split('=');
-                if (urlparam[0] == param) {
-                    return urlparam[1];
-                }
-            }
-        }
-
-        if (GetParameterValues('edit-id') != undefined) {
-
-            document.querySelector("[data-target='#modalSua']").click();
-        }
     });
 </script>
 <!-- /.content-wrapper -->
